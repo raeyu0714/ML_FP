@@ -19,6 +19,10 @@ RoMa 的核心啟發是先用較粗的全局資訊尋找對應，再用連續座
 
 *圖 1：兩張影像經由共享 XFeat backbone 產生描述子，再進行候選點配對的概念示例。*
 
+![XFeat 論文配對結果](assets/xfeat_paper_matching.png)
+
+*圖 2：XFeat 論文 Figure 2 的配對結果裁切圖；上排是 sparse matching，下排是 semi-dense matching。綠色線段表示兩張影像間的對應，這些對應可交給相機姿態估計或 3D 重建使用。來源：[XFeat: Accelerated Features for Lightweight Image Matching, CVPR 2024](https://openaccess.thecvf.com/content/CVPR2024/papers/Potje_XFeat_Accelerated_Features_for_Lightweight_Image_Matching_CVPR_2024_paper.pdf)。圖片僅作課程研究說明，保留原論文圖說與來源。*
+
 ## 課程要求與研究範圍
 
 本專案對應 [I2ML-2026 Investigation Track](https://nthu-cs-hmilab.github.io/I2ML-2026/project/)：
@@ -42,13 +46,13 @@ RoMa 的核心啟發是先用較粗的全局資訊尋找對應，再用連續座
 
 完整流程可拆成四個階段：
 
-\`\`\`text
+```text
 影像 A、B
   → 特徵提取
   → 搜尋可能的對應位置
   → 判斷配對並定位座標
   → 幾何姿態估計
-\`\`\`
+```
 
 我們分開記錄兩種主要錯誤：
 
@@ -61,23 +65,23 @@ RoMa 的核心啟發是先用較粗的全局資訊尋找對應，再用連續座
 
 ![XFeat backbone](assets/xfeat_backbone.png)
 
-*圖 2：XFeat 多尺度 CNN backbone 示意。正式實作以論文與本專案程式為準，圖片只用於組員理解。*
+*圖 3：XFeat 多尺度 CNN backbone 示意。正式實作以論文與本專案程式為準，圖片只用於組員理解。*
 
 XFeat 使用共享權重的輕量 CNN，從每張影像產生多尺度特徵，再由 detector／reliability 路徑挑出有限的候選位置，為每個位置產生 64 維描述子。兩張圖的描述子相似度經過雙向一致性篩選後形成稀疏配對。
 
-\`\`\`text
+```text
 Image A ─┐
          ├─ shared XFeat CNN ─ multi-scale maps ─ candidate points ─ 64D descriptors
 Image B ─┘
                      └─ descriptor similarity + mutual filtering ─ matched pairs
-\`\`\`
+```
 
 它快的原因是只處理稀疏候選點，不建立兩張完整特徵圖的全位置兩兩關係。它的研究瓶頸是候選介面：
 
-\`\`\`text
+```text
 真實連續位置：       ×
 已選候選位置：          ●     ●
-\`\`\`
+```
 
 即使描述子正確辨認了同一個物體，候選位置仍可能離真值數個像素。這是「可搜尋位置」的限制，不能只靠把匹配 head 變大解決。
 
@@ -85,30 +89,30 @@ Image B ─┘
 
 ![RoMa architecture](assets/roma_original.png)
 
-*圖 3：RoMa 的原始 coarse-to-fine 架構示意，依公開論文重繪。這裡借鑑的是全局搜尋、連續座標與粗到細 refinement 的設計原則。*
+*圖 4：RoMa 的原始 coarse-to-fine 架構示意，依公開論文重繪。這裡借鑑的是全局搜尋、連續座標與粗到細 refinement 的設計原則。*
 
 RoMa-style 流程先在較低解析度特徵上建立全局相關性：
 
-\`\`\`text
+```text
 coarse feature A × coarse feature B
   → all-position correlation
   → softmax coordinate expectation
   → coarse coordinate refinement
   → fine feature refinement
   → final correspondence and confidence
-\`\`\`
+```
 
 若以粗特徵 F_A(i)、F_B(j) 表示兩張圖的位置，相關性可寫成：
 
-\`\`\`text
-C(i,j) = F_A(i)^T F_B(j) / sqrt(d)
-\`\`\`
+$$
+\frac{F_A(i)^\top F_B(j)}{\sqrt{d}}
+$$
 
 再對 B 圖的所有粗網格位置取 softmax 加權座標：
 
-\`\`\`text
-p_hat_B(i) = sum_j softmax(C(i,j))_j * p_B(j)
-\`\`\`
+$$
+\hat p_B(i)=\sum_j \operatorname{softmax}(C(i,j))_j\,p_B(j)
+$$
 
 因此輸出不必被固定候選點綁住，可以先得到連續的初始座標，再在附近做粗、細修正。代價是要處理更大的位置集合；如果粗階段已經跑到錯誤區域，後面的局部細化也不一定能救回來。
 
@@ -116,7 +120,7 @@ p_hat_B(i) = sum_j softmax(C(i,j))_j * p_B(j)
 
 研究不直接重做完整 RoMa，而是固定 XFeat backbone，逐步加入可以獨立驗證的模組：
 
-\`\`\`text
+```text
 XFeat shared CNN
   → coarse / fine feature maps
   → optional one-layer self-attention
@@ -126,7 +130,7 @@ XFeat shared CNN
   → optional fine refinement
   → final correspondence
   → fixed pose evaluation
-\`\`\`
+```
 
 ![RoMa coarse-to-fine reference](assets/roma_original.png)
 
@@ -241,7 +245,7 @@ AUC 是姿態誤差曲線面積，不是單一 5 度通過率；點級 correct �
 
 ## Repository 結構
 
-\`\`\`text
+```text
 ML_FP/
 ├── README.md
 ├── assets/                  # README 圖片與小型圖表
@@ -251,7 +255,7 @@ ML_FP/
 ├── experiments/             # 每次 run 的 config、log、result、README
 ├── figures/                 # 報告用圖
 └── requirements.txt
-\`\`\`
+```
 
 不提交影像、深度、私密資料、API key、虛擬環境或大型 checkpoint。大型結果只記錄外部路徑、hash、step 和取得方式。
 
