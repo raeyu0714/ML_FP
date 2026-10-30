@@ -32,9 +32,7 @@ Image B: pixel p_B  ─────────┘
 - **搜尋錯誤**：正確位置根本沒有被搜尋到。
 - **定位錯誤**：已經在正確區域附近，但座標誤差仍超過像素門檻。
 
-![XFeat 配對示意圖](assets/xfeat_paper_matching.png)
-
-*圖 1：XFeat 配對示意圖。綠色線段表示兩張影像中被判定為對應的局部特徵，可交給姿態估計或 3D 重建。圖像取自 [XFeat, CVPR 2024](https://openaccess.thecvf.com/content/CVPR2024/papers/Potje_XFeat_Accelerated_Features_for_Lightweight_Image_Matching_CVPR_2024_paper.pdf)，不是本專案的測量結果。*
+![配對示意圖](assets/xfeat_matching_clean.jpg)
 
 
 ## 2. 目標模型與兩個 baseline
@@ -154,9 +152,7 @@ MegaDepth 適合當作共同資料，因為：
 
 MegaDepth 的限制是 MVS 深度可能有噪聲、空洞和不可重建區域；資料下載、解壓和前處理也很大。因此每次訓練要保存 manifest、有效 pair 數、深度完整性和資料 hash。
 
-![MegaDepth 論文資料示例](assets/megadepth_paper_figure.png)
-
-*圖 6：MegaDepth 論文 Figure 1 裁切，展示網路影像、深度預測與跨資料集泛化概念。來源：[MegaDepth, CVPR 2018](https://openaccess.thecvf.com/content_cvpr_2018/papers/Li_MegaDepth_Learning_Single-View_CVPR_2018_paper.pdf)。此圖是資料說明，不代表本專案已下載論文中的全部原始檔。*
+![MegaDepth 資料示例](assets/megadepth_paper_figure.png)
 
 ### 訓練與驗證切割
 

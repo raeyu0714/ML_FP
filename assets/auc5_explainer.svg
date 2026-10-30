@@ -1,16 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="650" viewBox="0 0 1200 650">
-<defs><style>text{font-family:Arial,'Noto Sans CJK TC',sans-serif;fill:#111827}.title{font-size:30px;font-weight:700}.label{font-size:20px}.small{font-size:17px}.axis{stroke:#334155;stroke-width:3}.grid{stroke:#cbd5e1;stroke-width:1}.curve1{fill:none;stroke:#2563eb;stroke-width:6}.curve2{fill:none;stroke:#16a34a;stroke-width:6}.curve3{fill:none;stroke:#dc2626;stroke-width:6}.fill1{fill:#bfdbfe;opacity:.65}</style></defs>
+<defs><style>text{font-family:Arial,'Noto Sans CJK TC',sans-serif;fill:#111827}.title{font-size:30px;font-weight:700}.label{font-size:20px}.small{font-size:17px}.axis{stroke:#334155;stroke-width:3}.grid{stroke:#cbd5e1;stroke-width:1}.curve{fill:none;stroke:#2563eb;stroke-width:6}.area{fill:#bfdbfe;opacity:.72}</style></defs>
 <rect width="1200" height="650" fill="white"/>
-<text x="55" y="50" class="title">AUC@5：0° 到 5° 姿態誤差範圍內的曲線下面積</text>
+<text x="55" y="50" class="title">AUC@5：只積分 0° 到 5° 的姿態誤差曲線</text>
 <line x1="120" y1="540" x2="1060" y2="540" class="axis"/><line x1="120" y1="540" x2="120" y2="110" class="axis"/>
 <line x1="120" y1="455" x2="1060" y2="455" class="grid"/><line x1="120" y1="370" x2="1060" y2="370" class="grid"/><line x1="120" y1="285" x2="1060" y2="285" class="grid"/><line x1="120" y1="200" x2="1060" y2="200" class="grid"/>
 <text x="65" y="545" class="label">0</text><text x="52" y="460" class="label">0.2</text><text x="52" y="375" class="label">0.4</text><text x="52" y="290" class="label">0.6</text><text x="52" y="205" class="label">0.8</text><text x="52" y="120" class="label">1.0</text>
-<text x="105" y="590" class="label">0°</text><text x="510" y="590" class="label">5°</text><text x="1015" y="590" class="label">20°</text><text x="500" y="630" class="label">pose error (degrees)</text><text x="12" y="320" transform="rotate(-90 12 320)" class="label">fraction of pairs below error</text>
-<path d="M120 540 L190 510 L260 465 L330 405 L400 340 L470 280 L540 238 L610 210 L700 185 L820 165 L950 150 L1060 142 L1060 540 Z" class="fill1"/>
-<path d="M120 540 L190 510 L260 465 L330 405 L400 340 L470 280 L540 238 L610 210 L700 185 L820 165 L950 150 L1060 142" class="curve1"/>
-<path d="M120 540 L190 525 L260 500 L330 465 L400 430 L470 390 L540 350 L610 315 L700 280 L820 245 L950 220 L1060 205" class="curve2"/>
-<path d="M120 540 L190 535 L260 530 L330 520 L400 505 L470 485 L540 460 L610 430 L700 390 L820 345 L950 300 L1060 270" class="curve3"/>
+<text x="105" y="590" class="label">0°</text><text x="510" y="590" class="label">5°</text><text x="1005" y="590" class="label">10°</text><text x="500" y="630" class="label">pose error (degrees)</text><text x="12" y="320" transform="rotate(-90 12 320)" class="label">fraction of pairs below error</text>
+<path d="M120 540 L190 510 L260 465 L330 405 L400 340 L470 280 L540 238 L540 540 Z" class="area"/>
+<path d="M120 540 L190 510 L260 465 L330 405 L400 340 L470 280 L540 238 L610 210 L700 185 L820 165 L950 150 L1060 142" class="curve"/>
 <line x1="540" y1="540" x2="540" y2="238" stroke="#1d4ed8" stroke-width="3" stroke-dasharray="8 8"/>
-<text x="565" y="235" class="small">AUC@5 的積分上限</text><text x="720" y="175" class="small" fill="#2563eb">較高 AUC</text><text x="720" y="270" class="small" fill="#16a34a">中等 AUC</text><text x="720" y="385" class="small" fill="#dc2626">較低 AUC</text>
-<text x="155" y="90" class="small">不是只計算「誤差是否小於 5°」的單一通過率；要累積整段 0–5° 的表現。</text>
+<text x="565" y="235" class="small">只計算這個陰影面積</text><text x="565" y="260" class="small">0°–5° = AUC@5</text><text x="720" y="175" class="small">同一條累積曲線</text>
+<text x="155" y="90" class="small">5° 之後的曲線只用來顯示趨勢，不納入 AUC@5。</text>
 </svg>
