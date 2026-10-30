@@ -33,7 +33,8 @@ Image B: pixel p_B  ─────────┘
 - **定位錯誤**：已經在正確區域附近，但座標誤差仍超過像素門檻。
 
 ![配對示意圖](assets/xfeat_matching_clean.jpg)
-*圖片配對示意圖。*
+
+*圖 1：圖片配對示意圖。*
 
 
 ## 2. 目標模型與兩個 baseline
@@ -153,7 +154,9 @@ MegaDepth 適合當作共同資料，因為：
 
 MegaDepth 的限制是 MVS 深度可能有噪聲、空洞和不可重建區域；資料下載、解壓和前處理也很大。因此每次訓練要保存 manifest、有效 pair 數、深度完整性和資料 hash。
 
-![MegaDepth 資料示例](assets/megadepth_paper_figure.png)
+![MegaDepth RGB 與深度示例](assets/megadepth_a_c_pair.jpg)
+
+*圖 6：MegaDepth 同一場景的 RGB 影像與對應深度圖示例。*
 
 ### 訓練與驗證切割
 
