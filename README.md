@@ -32,13 +32,16 @@ Image B: pixel p_B  ─────────┘
 - **搜尋錯誤**：正確位置根本沒有被搜尋到。
 - **定位錯誤**：已經在正確區域附近，但座標誤差仍超過像素門檻。
 
-![XFeat 論文的 sparse / semi-dense 配對](assets/xfeat_paper_matching.png)
+![XFeat 配對示意圖](assets/xfeat_paper_matching.png)
 
-*圖 1：XFeat 論文 Figure 2。上排是 sparse matching，下排是 semi-dense matching；綠色線段是對應，可用於姿態估計和 3D 重建。來源：[XFeat, CVPR 2024](https://openaccess.thecvf.com/content/CVPR2024/papers/Potje_XFeat_Accelerated_Features_for_Lightweight_Image_Matching_CVPR_2024_paper.pdf)。*
+*圖 1：XFeat 配對示意圖。綠色線段表示兩張影像中被判定為對應的局部特徵，可交給姿態估計或 3D 重建。圖像取自 [XFeat, CVPR 2024](https://openaccess.thecvf.com/content/CVPR2024/papers/Potje_XFeat_Accelerated_Features_for_Lightweight_Image_Matching_CVPR_2024_paper.pdf)，不是本專案的測量結果。*
 
-![RoMa 論文的 dense matching 示例](assets/roma_paper_matching.png)
+<p>
+<img src="assets/xfeat_input_ref.png" alt="XFeat official input reference image" width="48%">
+<img src="assets/xfeat_input_tgt.png" alt="XFeat official input target image" width="48%">
+</p>
 
-*圖 2：RoMa 論文 Figure 1。不同視角、光線和紋理條件下的密集對應視覺化。來源：[RoMa, CVPR 2024](https://openaccess.thecvf.com/content/CVPR2024/papers/Edstedt_RoMa_Robust_Dense_Feature_Matching_CVPR_2024_paper.pdf)。*
+*圖 2：配對前的兩張官方 XFeat 輸入影像。左圖是 reference，右圖是 target；它們展示不同取景和尺度下，模型在配對前實際看到的原始影像。來源：[XFeat official repository](https://github.com/verlab/accelerated_features/tree/main/assets)。*
 
 ## 2. 目標模型與兩個 baseline
 
