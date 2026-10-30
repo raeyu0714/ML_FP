@@ -121,6 +121,28 @@ Image A / Image B
 - coarse stage 若已經跑到錯誤區域，fine refinement 未必能救回來。
 - 完整模型的速度和準確率不能只用參數量推算，必須在相同硬體實測。
 
+## 相關性與連續座標公式
+
+RoMa-style coarse matching 先對兩張影像的粗特徵建立位置相似度。對 A 圖位置 i 和 B 圖位置 j：
+
+$$
+C(i,j)=\frac{F_A(i)^\top F_B(j)}{\sqrt{d}}
+$$
+
+把同一個 A 圖位置對 B 圖所有位置的相似度轉成權重：
+
+$$
+s_{ij}=\frac{\exp(C(i,j))}{\sum_k\exp(C(i,k))}
+$$
+
+再用權重讀出 B 圖的連續座標：
+
+$$
+\hat p_B(i)=\sum_j s_{ij}p_B(j)
+$$
+
+這些公式只說明「相似度 → 位置分布 → 連續座標期望」；完整 RoMa baseline 還包含特徵編碼、match decoder、confidence 和 warp refinement。
+
 ## 4. 資料集、切割與訓練預算
 
 ### 為什麼使用 MegaDepth
