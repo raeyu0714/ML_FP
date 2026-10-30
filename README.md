@@ -36,12 +36,6 @@ Image B: pixel p_B  ─────────┘
 
 *圖 1：XFeat 配對示意圖。綠色線段表示兩張影像中被判定為對應的局部特徵，可交給姿態估計或 3D 重建。圖像取自 [XFeat, CVPR 2024](https://openaccess.thecvf.com/content/CVPR2024/papers/Potje_XFeat_Accelerated_Features_for_Lightweight_Image_Matching_CVPR_2024_paper.pdf)，不是本專案的測量結果。*
 
-<p>
-<img src="assets/xfeat_input_ref.png" alt="XFeat official input reference image" width="48%">
-<img src="assets/xfeat_input_tgt.png" alt="XFeat official input target image" width="48%">
-</p>
-
-*圖 2：配對前的兩張官方 XFeat 輸入影像。左圖是 reference，右圖是 target；它們展示不同取景和尺度下，模型在配對前實際看到的原始影像。來源：[XFeat official repository](https://github.com/verlab/accelerated_features/tree/main/assets)。*
 
 ## 2. 目標模型與兩個 baseline
 
