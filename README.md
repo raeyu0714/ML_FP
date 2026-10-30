@@ -74,7 +74,7 @@ RoMa 不是把 XFeat 的候選點再加大，而是改變搜尋介面：先在�
 
 *圖 4：依 RoMa 論文 Figure 2 重畫的 baseline 流程。粗特徵、細特徵、Transformer match decoder、warp refiner 和兩種 supervision 分開表示。*
 
-![RoMa 論文架構原圖](assets/roma_paper_architecture.png)
+![RoMa 論文架構原圖](assets/roma_paper_architecture.jpg)
 
 *圖 5：RoMa 論文 Figure 2 原圖裁切，保留作者對 coarse encoder、fine encoder、match decoder 與 loss 的設計說明。*
 
