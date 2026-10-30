@@ -9,6 +9,6 @@
 <path d="M120 540 L190 510 L260 465 L330 405 L400 340 L470 280 L540 238 L540 540 Z" class="area"/>
 <path d="M120 540 L190 510 L260 465 L330 405 L400 340 L470 280 L540 238 L610 210 L700 185 L820 165 L950 150 L1060 142" class="curve"/>
 <line x1="540" y1="540" x2="540" y2="238" stroke="#1d4ed8" stroke-width="3" stroke-dasharray="8 8"/>
-<text x="565" y="235" class="small">只計算這個陰影面積</text><text x="565" y="260" class="small">0°–5° = AUC@5</text><text x="720" y="175" class="small">同一條累積曲線</text>
+<text x="565" y="235" class="small">只計算這個陰影面積</text><text x="565" y="260" class="small">0°–5° = AUC@5</text>
 <text x="155" y="90" class="small">5° 之後的曲線只用來顯示趨勢，不納入 AUC@5。</text>
 </svg>

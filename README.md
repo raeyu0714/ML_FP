@@ -33,6 +33,7 @@ Image B: pixel p_B  ─────────┘
 - **定位錯誤**：已經在正確區域附近，但座標誤差仍超過像素門檻。
 
 ![配對示意圖](assets/xfeat_matching_clean.jpg)
+*圖片配對示意圖。*
 
 
 ## 2. 目標模型與兩個 baseline
@@ -320,14 +321,3 @@ ML_FP/
 - Hybrid 的正式訓練與評估。
 - 未見場景測試、多 seed 不確定度和完整 GPU/CPU/記憶體報告。
 
-## 可重現原則
-
-每筆結果至少要能回答：
-
-- 使用哪個 commit、config、manifest 和 scene split？
-- 更新幾步、看過多少 image-pair exposure？
-- AUC 的資料、solver seed 和聚合方式？
-- 計時是否包含讀圖、前處理、特徵、匹配和姿態？
-- checkpoint 能否恢復，結果能否由原始 log 重算？
-
-若答案不完整，標為 partial 或 diagnostic，不標為正式模型結論。
